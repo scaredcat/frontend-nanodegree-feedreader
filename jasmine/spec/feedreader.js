@@ -113,5 +113,21 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+
+         var content = null; //keep track of the current content of the feed
+
+         beforeEach(function(done) {
+            content = $('.feed').html();
+
+            loadFeed(1, function() { //assume that there are at least two things in the feed
+                done();
+            })
+         });
+
+         it('load feed, feed changed??', function(done) {
+            //check if the html content has changed
+            expect($('.feed').html()).not.toBe(content);
+            done();
+         });
     });
 }());
